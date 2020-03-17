@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8C492F024158A6000C38270 /* phase_vocoder.c in Sources */ = {isa = PBXBuildFile; fileRef = D8C492EF24158A6000C38270 /* phase_vocoder.c */; };
+		D8C492F324162E0F00C38270 /* fft_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = D8C492F224162E0F00C38270 /* fft_helper.c */; };
 		D8F289D923E4F158005F5645 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F289D823E4F158005F5645 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,12 +25,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D8C492ED24158A6000C38270 /* SilenceStripping-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SilenceStripping-Bridging-Header.h"; sourceTree = "<group>"; };
+		D8C492EE24158A6000C38270 /* phase_vocoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = phase_vocoder.h; sourceTree = "<group>"; };
+		D8C492EF24158A6000C38270 /* phase_vocoder.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = phase_vocoder.c; sourceTree = "<group>"; };
+		D8C492F124162E0F00C38270 /* fft_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fft_helper.h; sourceTree = "<group>"; };
+		D8C492F224162E0F00C38270 /* fft_helper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fft_helper.c; sourceTree = "<group>"; };
 		D8F289D523E4F158005F5645 /* SilenceStripping */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SilenceStripping; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8F289D823E4F158005F5645 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		D8F289DF23E4F29C005F5645 /* beginning.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beginning.mp3; sourceTree = "<group>"; };
 		D8F289E023E4F6C5005F5645 /* SilenceStripping.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SilenceStripping.entitlements; sourceTree = "<group>"; };
-		D8F289E123E50598005F5645 /* input_float.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = input_float.wav; sourceTree = "<group>"; };
-		D8FA28E523EB8FA400AF889C /* cs189.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cs189.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +67,11 @@
 			children = (
 				D8F289E023E4F6C5005F5645 /* SilenceStripping.entitlements */,
 				D8F289D823E4F158005F5645 /* main.swift */,
-				D8FA28E523EB8FA400AF889C /* cs189.mp3 */,
-				D8F289E123E50598005F5645 /* input_float.wav */,
-				D8F289DF23E4F29C005F5645 /* beginning.mp3 */,
+				D8C492F124162E0F00C38270 /* fft_helper.h */,
+				D8C492F224162E0F00C38270 /* fft_helper.c */,
+				D8C492EE24158A6000C38270 /* phase_vocoder.h */,
+				D8C492EF24158A6000C38270 /* phase_vocoder.c */,
+				D8C492ED24158A6000C38270 /* SilenceStripping-Bridging-Header.h */,
 			);
 			path = SilenceStripping;
 			sourceTree = "<group>";
@@ -102,6 +108,7 @@
 				TargetAttributes = {
 					D8F289D423E4F158005F5645 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -128,7 +135,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C492F024158A6000C38270 /* phase_vocoder.c in Sources */,
 				D8F289D923E4F158005F5645 /* main.swift in Sources */,
+				D8C492F324162E0F00C38270 /* fft_helper.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,11 +260,19 @@
 		D8F289DD23E4F158005F5645 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SilenceStripping/SilenceStripping.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2A3N3385D2;
 				ENABLE_HARDENED_RUNTIME = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SilenceStripping/SilenceStripping-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -263,11 +280,18 @@
 		D8F289DE23E4F158005F5645 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SilenceStripping/SilenceStripping.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2A3N3385D2;
 				ENABLE_HARDENED_RUNTIME = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SilenceStripping/SilenceStripping-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

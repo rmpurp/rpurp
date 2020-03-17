@@ -1,3 +1,6 @@
+deploy.sh
+server_deploy.sh
+
 *.db
 *.json
 *.txt
